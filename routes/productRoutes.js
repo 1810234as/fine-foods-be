@@ -1,5 +1,5 @@
 import express from "express";
-import auth from "../configs/auth.js";
+import auth from "../config/auth.js";
 import {
   getProducts,
   getProductById,
