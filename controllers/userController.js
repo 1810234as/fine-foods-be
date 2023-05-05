@@ -35,11 +35,11 @@ const authUser = asyncHandler(async (req, res) => {
     } else {
       res
         .status(401)
-        .json({ success: false, message: "Incorrect username or password" });
+        .json({ success: false, message: "Неверный логин или пароль" });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Ошибка сервера" });
   }
 });
 
@@ -55,7 +55,7 @@ const registerUser = asyncHandler(async (req, res) => {
     if (userExists) {
       return res
         .status(400)
-        .json({ success: false, message: "Email account is already in use!" });
+        .json({ success: false, message: "Пользователь с такой электронной почтой уже существует" });
     }
 
     const user = await User.create({
@@ -82,11 +82,11 @@ const registerUser = asyncHandler(async (req, res) => {
     } else {
       return res
         .status(400)
-        .json({ success: false, message: "Invalid user data!" });
+        .json({ success: false, message: "Не удалось создать пользователя" });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Ошибка сервера" });
   }
 });
 
