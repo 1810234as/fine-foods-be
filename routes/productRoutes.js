@@ -8,13 +8,11 @@ import {
   deleteProduct,
 } from "../controllers/productController.js";
 
-
-
 const router = express.Router();
 
 router.use(auth);
 
-router.get("/all", getProducts);
+router.get("/", getProducts);
 router.get("/:id", getProductById);
 router.post("/create", createProduct);
 router.put("/update/:id", updateProduct);
