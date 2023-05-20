@@ -18,7 +18,7 @@ const getProductById = asyncHandler(async (req, res) => {
   if (!product) {
     return res
       .status(404)
-      .json({ success: false, message: "Product not found" });
+      .json({ success: false, message: "Продукт не найден" });
   }
 
   res.json({ success: true, data: product });
@@ -52,7 +52,7 @@ const updateProduct = asyncHandler(async (req, res) => {
   if (!product) {
     return res
       .status(404)
-      .json({ success: false, message: "Product not found" });
+      .json({ success: false, message: "Продукт не найден" });
   }
 
   product.name = name;
@@ -73,12 +73,12 @@ const deleteProduct = asyncHandler(async (req, res) => {
   if (!product) {
     return res
       .status(404)
-      .json({ success: false, message: "Product not found" });
+      .json({ success: false, message: "Продукт не найден" });
   }
 
   await Product.deleteOne({ _id: req.params.id });
 
-  res.json({ success: true, message: "Product removed" });
+  res.json({ success: true, message: "Продукт удалён" });
 });
 
 export {
