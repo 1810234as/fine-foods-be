@@ -76,7 +76,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
       .json({ success: false, message: "Product not found" });
   }
 
-  await product.remove();
+  await Product.deleteOne({ _id: req.params.id });
 
   res.json({ success: true, message: "Product removed" });
 });
