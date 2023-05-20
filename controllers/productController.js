@@ -6,7 +6,7 @@ import Product from "../models/productModel.js";
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({});
-  res.json({ success: true, data: products });
+  res.json({ success: true, data: products, message: "Продукты получены" });
 });
 
 // @desc    Fetch a single product by ID
@@ -30,16 +30,29 @@ const getProductById = asyncHandler(async (req, res) => {
 const createProduct = asyncHandler(async (req, res) => {
   const { name, description, price } = req.body;
 
-  const product = new Product({
-    name,
-    description,
-    price,
-  });
+  try {
+    const product = new Product({
+      name,
+      description,
+      price,
+    });
 
-  const createdProduct = await product.save();
+    const createdProduct = await product.save();
 
-  res.status(201).json({ success: true, data: createdProduct });
+    return res.status(201).json({
+      success: true,
+      data: createdProduct,
+      message: 'Продукт добавлен',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: 'Ошибка сервера',
+      message: 'Ошибка сервера',
+    });
+  }
 });
+
 
 // @desc    Update a product by ID
 // @route   PUT /api/products/:id
@@ -61,7 +74,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   const updatedProduct = await product.save();
 
-  res.json({ success: true, data: updatedProduct });
+  res.json({ success: true, data: updatedProduct, message: "Продукт успешно обновлен" });
 });
 
 // @desc    Delete a product by ID
